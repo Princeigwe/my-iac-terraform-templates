@@ -18,5 +18,5 @@ provider "aws" {
 ## the property "instance_type" The EC2 instance type determines the amount of CPU, memory, disk space, and networking capacity available
 resource "aws_instance" "staging_env" {
   ami           = "ami-08305dd8ab642ad8c"
-  instance_type = "t2.micro"
+  instance_type = "${var.instance_type}"
 }
