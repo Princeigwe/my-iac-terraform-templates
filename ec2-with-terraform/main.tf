@@ -19,4 +19,18 @@ provider "aws" {
 resource "aws_instance" "staging_env" {
   ami           = "ami-08305dd8ab642ad8c"
   instance_type = "${var.instance_type}"
+
+  provisioner "remote-exec"{
+    connection {
+      type="ssh"
+      user="root"
+      password = "${var.instane_password}"
+      host = "${self.public_ip}"
+    }
+    # list of commands to run on the remote ec2 instance
+    inline = [ 
+      "sudo apt-get update",
+      " echo 'updated' ",
+    ]
+  }
 }
